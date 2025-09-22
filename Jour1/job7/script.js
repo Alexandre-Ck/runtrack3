@@ -6,7 +6,7 @@ function jourTravaille() {
 
   for (let i = 0; i < joursemaine.length; i++) {
     if (joursemaine[i] === 'Samedi' || joursemaine[i] === 'Dimanche') {
-      console.log(joursemaine[i] + " : Jour non travaillé");
+      console.log(joursemaine[i] + " : Jour non travaillé/ Weekend");
     } else {
       console.log(joursemaine[i] + " : Jour travaillé");
     }
