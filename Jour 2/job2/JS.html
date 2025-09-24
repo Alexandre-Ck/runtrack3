@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Exercices JavaScript — Une page, tout-en-un</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #12172a;
+      --muted: #9aa4b2;
+      --text: #e7ecf3;
+      --accent: #6aa9ff;
+      --border: #1f2640;
+      --green: #20c997;
+      --red: #ef476f;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      line-height: 1.55;
+    }
+    header {
+      padding: 2rem 1rem; text-align: center; border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    }
+    header h1 { margin: 0 0 .5rem; font-size: clamp(1.4rem, 2.2vw, 2rem); }
+    header p { margin: 0; color: var(--muted); }
+    main { max-width: 980px; margin: 0 auto; padding: 1.5rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1rem 1rem 1.25rem; margin: 1rem 0 1.2rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25), inset 0 1px rgba(255,255,255,0.03);
+    }
+    .card h2 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    .meta { color: var(--muted); font-size: .95rem; margin-bottom: .6rem; }
+    .row { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    button {
+      background: transparent; color: var(--text); border: 1px solid var(--border);
+      padding: .5rem .8rem; border-radius: 10px; cursor: pointer;
+    }
+    button:hover { border-color: var(--accent); }
+    .run { border-color: var(--accent); }
+    .ok  { color: #052; background: rgba(32,201,151,.1); border-color: rgba(32,201,151,.35); }
+    .warn{ color: #520; background: rgba(255,193,7,.07); border-color: rgba(255,193,7,.3); }
+    .danger{ color:#520; background: rgba(239,71,111,.08); border-color: rgba(239,71,111,.28);}
+    .io {
+      margin-top: .6rem; background: #0e1428; border: 1px dashed var(--border); border-radius: 10px; padding: .6rem .7rem;
+      font-family: var(--mono); white-space: pre-wrap; min-height: 2.2rem;
+    }
+    code, pre { font-family: var(--mono); }
+    pre {
+      margin: .7rem 0; padding: .7rem .9rem; border-radius: 10px;
+      background: #0e1428; border: 1px solid var(--border); overflow:auto;
+    }
+    input, .text {
+      background: #0e1428; border: 1px solid var(--border); color: var(--text);
+      padding: .45rem .6rem; border-radius: 10px; min-width: 220px;
+    }
+    .muted { color: var(--muted); }
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 860px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+    .badge { font-size: .8rem; padding: .1rem .45rem; border-radius: 6px; border:1px solid var(--border); color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Exercices JavaScript — Théorie + Pratique (interactifs)</h1>
+    <p>Ouvre la <strong>Console</strong> (F12) pour voir les logs. Clique sur “Exécuter” pour chaque exercice.</p>
+  </header>
+
+  <main>
+
+    <!-- Ex. 1 -->
+    <section class="card">
+      <h2>Ex. 1 — Premiers pas : <code>console.log</code></h2>
+      <div class="meta">Théorie&nbsp;: exécution séquentielle, utilisation de <code>console.log()</code>.</div>
+      <div class="row">
+        <button class="run" onclick="EX1()">Exécuter</button>
+        <span class="badge">Console + Sortie</span>
+      </div>
+      <div id="out1" class="io"></div>
+      <pre>// À connaître :
+console.log("Bonjour"); // affiche dans la console
+      </pre>
+    </section>
+
+    <!-- Ex. 2 -->
+    <section class="card">
+      <h2>Ex. 2 — Variables et portée (<code>var</code> vs <code>let</code> vs <code>const</code>)</h2>
+      <div class="meta">Théorie&nbsp;: <code>var</code>=portée fonction, <code>let</code>=portée bloc, <code>const</code>=non réaffectable.</div>
+      <div class="row">
+        <button class="run" onclick="EX2()">Exécuter</button>
+        <span class="badge">Console + Explication</span>
+      </div>
+      <div id="out2" class="io"></div>
+      <pre>// Démos rapides :
+for (var i=0;i<3;i++) {}
+// i existe encore ici (var = scope fonction)
+
+for (let j=0;j<3;j++) {}
+// j n'existe plus ici (let = scope bloc)
+      </pre>
+    </section>
+
+    <!-- Ex. 3 -->
+    <section class="card">
+      <h2>Ex. 3 — Fonctions</h2>
+      <div class="meta">Théorie&nbsp;: déclaration, appel, valeur de retour.</div>
+      <div class="row">
+        <button class="run" onclick="EX3()">Exécuter</button>
+        <span class="badge">Console</span>
+      </div>
+      <div id="out3" class="io"></div>
+      <pre>function addition(a,b){ return a+b; }
+console.log( addition(4,6) ); // 10
+      </pre>
+    </section>
+
+    <!-- Ex. 4 -->
+    <section class="card">
+      <h2>Ex. 4 — Tableaux</h2>
+      <div class="meta">Théorie&nbsp;: création, <code>.push()</code>, boucle <code>for...of</code>.</div>
+      <div class="row">
+        <button class="run" onclick="EX4()">Exécuter</button>
+        <span class="badge">Console</span>
+      </div>
+      <div id="out4" class="io"></div>
+    </section>
+
+    <!-- Ex. 5 -->
+    <section class="card">
+      <h2>Ex. 5 — Objets + méthode</h2>
+      <div class="meta">Théorie&nbsp;: clés/valeurs, méthode utilisant <code>this</code>.</div>
+      <div class="row">
+        <button class="run" onclick="EX5()">Exécuter</button>
+        <span class="badge">Console</span>
+      </div>
+      <div id="out5" class="io"></div>
+    </section>
+
+    <!-- Ex. 6 -->
+    <section class="card">
+      <h2>Ex. 6 — Égalité stricte (<code>===</code>)</h2>
+      <div class="meta">Théorie&nbsp;: éviter la coercition implicite de <code>==</code>.</div>
+      <div class="row">
+        <button class="run" onclick="EX6()">Exécuter</button>
+        <span class="badge">Console + Explication</span>
+      </div>
+      <div id="out6" class="io"></div>
+    </section>
+
+    <!-- Ex. 7 -->
+    <section class="card">
+      <h2>Ex. 7 — Callback & <code>forEach</code></h2>
+      <div class="meta">Théorie&nbsp;: passer une fonction en argument, fléchées.</div>
+      <div class="row">
+        <button class="run" onclick="EX7()">Exécuter</button>
+        <span class="badge">Console</span>
+      </div>
+      <div id="out7" class="io"></div>
+    </section>
+
+    <div class="grid-2">
+      <!-- Ex. 8 -->
+      <section class="card">
+        <h2>Ex. 8 — DOM : sélection + modification</h2>
+        <div class="meta">Théorie&nbsp;: <code>querySelector</code>, <code>textContent</code>.</div>
+        <div class="row">
+          <button class="run" onclick="EX8()">Exécuter</button>
+          <span class="badge">DOM</span>
+        </div>
+        <p id="titre">Bonjour (titre initial)</p>
+        <div id="out8" class="io"></div>
+      </section>
+
+      <!-- Ex. 9 -->
+      <section class="card">
+        <h2>Ex. 9 — DOM : création dynamique</h2>
+        <div class="meta">Théorie&nbsp;: <code>createElement</code>, <code>appendChild</code>, <code>remove</code>.</div>
+        <div class="row">
+          <button id="btnAdd" class="run">Ajouter un paragraphe</button>
+          <button id="btnClear" class="danger">Tout supprimer</button>
+          <span class="badge">DOM</span>
+        </div>
+        <div id="zone9" class="io"></div>
+      </section>
+    </div>
+
+    <!-- Ex. 10 -->
+    <section class="card">
+      <h2>Ex. 10 — Événements : input + bouton</h2>
+      <div class="meta">Théorie&nbsp;: écouteurs d’événements, <code>addEventListener</code>, gestion clavier.</div>
+      <div class="row">
+        <label for="nom" class="muted">Votre nom :</label>
+        <input id="nom" type="text" placeholder="Saisir un nom..." />
+        <button id="envoyer" class="run">Envoyer</button>
+      </div>
+      <div id="salutation" class="io muted">Saisis un nom et clique sur Envoyer, ou tape Entrée.</div>
+    </section>
+
+    <section class="card">
+      <h2>Note “à compléter” (optionnel)</h2>
+      <div class="meta">Pour l’entraînement, commente le code des solutions dans la section <code>&lt;script&gt;</code> et tente tes propres versions.</div>
+      <ul class="muted">
+        <li>Ajoute un exercice bonus : tri d’un tableau d’objets par note décroissante.</li>
+        <li>Ajoute un compteur de clics sur “Ajouter un paragraphe”.</li>
+        <li>Empêche l’envoi tant que le nom fait moins de 2 caractères.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script>
+    // Fonction utilitaire pour afficher du texte dans un élément HTML donné par son id
+    // Paramètres:
+    //  - id : identifiant de l'élément DOM (par ex. <div id="out1">)
+    //  - ...lines : une ou plusieurs lignes de texte à afficher (elles seront séparées par des retours ligne)
+    const print = (id, ...lines) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = lines.join("\n");
+    };
+
+    // [Ex.1] Fonction de base qui écrit un message dans la console
+    // et l’affiche également dans la zone HTML #out1
+    function EX1() {
+      console.clear();
+      console.log("[Ex.1] Bienvenue dans JavaScript !");
+      print("out1", "Console: [Ex.1] Bienvenue dans JavaScript !");
+    }
+
+    // [Ex.2] Démonstration de l’utilisation des variables en JS (var, let, const)
+    // - var : portée globale/fonctionnelle, accessible après une boucle
+    // - let : portée bloc, non accessible après la boucle
+    // - const : constante non réaffectable
+    function EX2() {
+      console.log("[Ex.2] Démonstration var/let/const");
+      let log = [];
+      // Boucle avec var : i reste défini après la boucle
+      for (var i = 0; i < 3; i++) {}
+      log.push("Après for(var i=0;i<3;i++){} -> i existe:", typeof i !== "undefined", "(i="+i+")");
+      
+      // Boucle avec let : j est uniquement visible dans le bloc {}
+      try {
+        for (let j = 0; j < 3; j++) {}
+        // Ici j n’existe plus -> devrait générer ReferenceError
+        log.push("Après for(let j=0;j<3;j++){} -> j:", j);
+      } catch(e) {
+        log.push("Après for(let j...){} -> j provoque ReferenceError (attendu)");
+      }
+
+      // Déclaration const (non réaffectable)
+      const c = 10;
+      log.push("const c = 10; (non réaffectable)");
+
+      print("out2", ...log);
+    }
+
+    // [Ex.3] Démonstration de fonctions simples en JavaScript
+    // hello() retourne une chaîne
+    // addition(a,b) retourne la somme
+    function EX3() {
+      function hello(){ return "Hello World"; }
+      function addition(a,b){ return a+b; }
+
+      console.log("[Ex.3]", hello());
+      console.log("[Ex.3] 4 + 6 =", addition(4,6));
+      print("out3", hello(), "4 + 6 = " + addition(4,6));
+    }
+
+    // [Ex.4] Démonstration des tableaux :
+    // - Création d’une liste de cours
+    // - Ajout d’un élément via push
+    // - Parcours avec for...of
+    function EX4() {
+      const courses = ["HTML","CSS","JavaScript"];
+      courses.push("NodeJS");
+      let lines = [];
+      for (const c of courses) {
+        console.log("[Ex.4] cours:", c);
+        lines.push("• " + c);
+      }
+      print("out4", ...lines);
+    }
+
+    // [Ex.5] Exemple d’objet JavaScript avec propriétés et méthode
+    // - etudiant possède un nom, un âge, une note
+    // - la méthode presentation utilise this pour afficher ses infos
+    function EX5() {
+      const etudiant = {
+        nom: "Ava",
+        age: 22,
+        note: 17,
+        presentation() {
+          return `Je m’appelle ${this.nom} et j’ai ${this.age} ans.`;
+        }
+      };
+      const msg = etudiant.presentation();
+      console.log("[Ex.5]", msg);
+      print("out5", msg);
+    }
+
+    // [Ex.6] Différence entre == et ===
+    // == compare les valeurs avec coercition de type
+    // === compare valeur ET type, sans conversion
+    function EX6() {
+      const a = (0 == "0");   // true
+      const b = (0 === "0");  // false
+      console.log("[Ex.6] 0 == '0'  ->", a);
+      console.log("[Ex.6] 0 === '0' ->", b);
+      const exp = [
+        "Explication :",
+        "== applique une coercition de type -> 0 == '0' est true.",
+        "=== compare valeur ET type -> 0 === '0' est false."
+      ];
+      print("out6", "0 == '0'  -> " + a, "0 === '0' -> " + b, "", ...exp);
+    }
+
+    // [Ex.7] Démonstration de forEach sur un tableau
+    // - Affiche l’index et la valeur de chaque élément
+    function EX7() {
+      const techs = ["HTML","CSS","JS"];
+      let lines = [];
+      techs.forEach((item, i) => {
+        console.log(`[Ex.7] tech[${i}] = ${item}`);
+        lines.push(`tech[${i}] = ${item}`);
+      });
+      print("out7", ...lines);
+    }
+
+    // [Ex.8] Modification d’un élément du DOM via JS
+    // - Récupère <h1 id="titre"> et change son texte
+    function EX8() {
+      const h1 = document.querySelector("#titre");
+      if (!h1) return;
+      h1.textContent = "Salut avec JavaScript — Ex.8 (modifié)";
+      print("out8", "Titre mis à jour via JS.");
+    }
+
+    // [Ex.9] Manipulation dynamique du DOM
+    // - Ajout de paragraphes via bouton "Ajouter"
+    // - Vidage de la zone via bouton "Vider"
+    const zone9 = document.getElementById("zone9");
+    const btnAdd = document.getElementById("btnAdd");
+    const btnClear = document.getElementById("btnClear");
+    let pCount = 0;
+
+    // Clique sur "Ajouter" -> crée un <p> et l’ajoute
+    btnAdd?.addEventListener("click", () => {
+      const p = document.createElement("p");
+      p.textContent = `Paragraphe #${++pCount} ajouté dynamiquement (Ex.9)`;
+      zone9?.appendChild(p);
+    });
+
+    // Clique sur "Vider" -> supprime tout dans zone9
+    btnClear?.addEventListener("click", () => {
+      zone9.innerHTML = "";
+      pCount = 0;
+    });
+
+    // [Ex.10] Interaction avec formulaire
+    // - Récupère un nom depuis un input
+    // - Vérifie s’il est vide
+    // - Affiche un message de bienvenue ou une alerte
+    const inputNom = document.getElementById("nom");
+    const btnEnvoyer = document.getElementById("envoyer");
+    const zoneSalut = document.getElementById("salutation");
+
+    // Fonction appelée lorsqu’on clique ou appuie sur Enter
+    function saluer() {
+      const nom = (inputNom?.value || "").trim();
+      if (!nom) {
+        console.log("[Ex.10] Merci de saisir un nom.");
+        zoneSalut.textContent = "Merci de saisir un nom.";
+        zoneSalut.classList.add("warn");
+        return;
+      }
+      const message = `Bonjour ${nom}`;
+      console.log("[Ex.10]", message);
+      zoneSalut.textContent = message;
+      zoneSalut.classList.remove("warn");
+      zoneSalut.classList.add("ok");
+    }
+
+    // Associe le bouton et la touche Enter à la fonction saluer()
+    btnEnvoyer?.addEventListener("click", saluer);
+    inputNom?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") saluer();
+    });
+
+  </script>
+</body>
+</html>
