@@ -1,0 +1,15 @@
+body {
+  min-height: 4096px;   /* hauteur demandée */
+  margin: 0;
+  background-color: beige;   /* couleur de fond */
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 30px;
+  background: red;   /* couleur de départ */
+  width: 0;          /* la largeur sera mise à jour par JS */
+  transition: width 0.1s linear, background 0.2s linear;
+}
