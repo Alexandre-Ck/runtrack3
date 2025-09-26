@@ -22,5 +22,8 @@
     <img src="images/arc6.png" alt="" id="img6">
 </div>
 
+<div id="container" style=" background-color: black;height: 400px; color: white;">
+<h1>Arc-en-ciel</h1>
+</div>
 </body>
 </html>
