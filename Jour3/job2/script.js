@@ -63,7 +63,7 @@ $("#images").on("click", "img", function() {// Au clic sur une image
         expected++; // prochaine image attendue
         alert("Brooooooooooh t'as reussi!!!!!!!!" + expected); // on affiche un message pour confirmer la bonne image cliquée
     } else {
-        alert("Idiot, c'est pas la bonne image !");
+        alert("Idiot, tu as perdu !");
     }
 });
 
