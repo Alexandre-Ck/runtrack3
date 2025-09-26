@@ -61,8 +61,9 @@ $("#images").on("click", "img", function() {// Au clic sur une image
             $img.fadeIn(200);// on remet l’image en 200ms
         });
         expected++; // prochaine image attendue
+        alert("Brooooooooooh t'as reussi!!!!!!!!" + expected); // on affiche un message pour confirmer la bonne image cliquée
     } else {
-        alert("Ce n’est pas la bonne image Salopard, essaie encore !");
+        alert("Idiot, c'est pas la bonne image !");
     }
 });
 
