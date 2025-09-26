@@ -52,7 +52,7 @@ $("#images").on("click", "img", function() {// Au clic sur une image
     let id = $(this).attr("id"); // img1, img2, img3, img4, img5, img6 ca veut dire le numéro de l'image cliquée        
     let num = parseInt(id.replace("img", "")); // 1, 2, 3, 4, 5, 6 ca veut dire le numéro de l'image cliquée dans l'ordre croissant 
 
-    if (num === expected) {
+    if (num === expected) {// si c’est la bonne image cliquée (=== expected)
         // Bonne image → on la déplace
         let $img = $(this);// image cliquée, le this est l'image cliquée
         $img.fadeOut(200, function() // on déplace l’image dans #container, elle disparait en 200ms
@@ -62,7 +62,7 @@ $("#images").on("click", "img", function() {// Au clic sur une image
         });
         expected++; // prochaine image attendue
     } else {
-        alert("Ce n’est pas la bonne image, essaie encore !");
+        alert("Ce n’est pas la bonne image Salopard, essaie encore !");
     }
 });
 

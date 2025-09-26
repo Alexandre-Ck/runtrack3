@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Peaky Blinders</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Informations sur Peaky Blinders</h1>
+    <button id="loadData">Charger les personnages</button>
+    <div id="data"></div>
+
+    <script>
+        document.getElementById('loadData').addEventListener('click', async () => {
+            const response = await fetch('https://peaky-blinders.calmsand-ff14fe59.eastus.azurecontainerapps.io/api/cast');
+            const data = await response.json();
+            const dataDiv = document.getElementById('data');
+            dataDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        });
+    </script>
+</body>
+</html>
