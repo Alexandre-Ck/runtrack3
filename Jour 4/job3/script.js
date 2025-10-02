@@ -4,8 +4,8 @@ document.getElementById("filtrer").addEventListener("click", function () {
   const type = document.getElementById("type").value;
 
   fetch("pokemon.json")
-    .then((response) => response.json())
-    .then((pokemons) => {
+    .then((response) => response.json()) // ca veut dire que nous voulons convertir la réponse en JSON
+    .then((pokemons) => { 
       let resultats = pokemons.filter(pokemon => {
         let matchId = id === "" || pokemon.id == id;
         let matchNom = nom === "" || pokemon.name.french.toLowerCase().includes(nom);
