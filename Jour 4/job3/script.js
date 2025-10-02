@@ -5,11 +5,11 @@ document.getElementById("filtrer").addEventListener("click", function () {
 
   fetch("pokemon.json")
     .then((response) => response.json()) // ca veut dire que nous voulons convertir la réponse en JSON
-    .then((pokemons) => { 
+    .then((pokemons) => { // ca veut dire que nous voulons utiliser la variable pokemons
       let resultats = pokemons.filter(pokemon => {
-        let matchId = id === "" || pokemon.id == id;
-        let matchNom = nom === "" || pokemon.name.french.toLowerCase().includes(nom);
-        let matchType = type === "" || pokemon.type.includes(type);
+        let matchId = id === "" || pokemon.id == id;// si l'id est vide ou égal au id du pokemon
+        let matchNom = nom === "" || pokemon.name.french.toLowerCase().includes(nom); // si le nom est vide ou contient le nom du pokemon
+        let matchType = type === "" || pokemon.type.includes(type); // si le type est vide ou contient le type du pokemon
 
         return matchId && matchNom && matchType;
       });
