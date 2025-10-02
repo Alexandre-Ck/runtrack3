@@ -19,4 +19,6 @@ $(document).ready(function() {
     });
 });
 
+ const texte = document.getElementById("citation").innerText;
+ console.log(texte);  
  
